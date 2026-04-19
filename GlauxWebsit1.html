@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLAUX — Buy with Confidence</title>
+  <meta name="description" content="GLAUX helps you buy your next used car with confidence. AI-powered insights for New Zealand car buyers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B2A4A;
+      --gold:   #C9A96E;
+      --cream:  #FAFAF8;
+      --mist:   #F2F1EE;
+      --text:   #1B2A4A;
+      --subtle: #6B7A96;
+      --line:   rgba(27,42,74,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--navy);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.55s forwards;
+    }
+
+    .hero-body {
+      max-width: 480px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--subtle);
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.65s forwards;
+    }
+
+    .hero-body strong {
+      color: var(--navy);
+      font-weight: 400;
+    }
+
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.75s forwards;
+    }
+
+    .coming-soon::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* ── OWL ILLUSTRATION ── */
+    .owl-wrap {
+      margin-top: 72px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s forwards;
+    }
+
+    /* ── SECTION: ABOUT ── */
+    .section {
+      padding: 100px 48px;
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--navy);
+    }
+
+    .about-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .about-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--subtle);
+    }
+
+    .about-body p + p {
+      margin-top: 20px;
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      background: var(--mist);
+      padding: 100px 48px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .features-grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .feature-item {
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .feature-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .feature-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--subtle);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 60px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--navy);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--navy); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--subtle);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .section { padding: 72px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .features-section { padding: 72px 24px; }
+      .features-grid { grid-template-columns: 1fr; gap: 36px; }
+      footer { flex-direction: column; gap: 24px; text-align: center; padding: 48px 24px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="logo">
+      <!-- ╔══════════════════════════════════════════════════════╗
+           ║  LOGO SWAP — replace SVG below with your real logo  ║
+           ║  Option A (SVG file): <img src="logo.svg" width="32" height="32" alt="GLAUX">
+           ║  Option B (PNG file): <img src="logo.png" width="32" height="32" alt="GLAUX">
+           ║  Put the logo file in the same folder as index.html ║
+           ╚══════════════════════════════════════════════════════╝ -->
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="15" stroke="#1B2A4A" stroke-width="1.5"/>
+        <path d="M16 6 C10 6 7 10 7 14 C7 19 10 22 13 22 L13 25 L19 25 L19 22 C22 22 25 19 25 14 C25 10 22 6 16 6Z" fill="#1B2A4A"/>
+        <circle cx="13" cy="14" r="2" fill="#FAFAF8"/>
+        <circle cx="19" cy="14" r="2" fill="#FAFAF8"/>
+        <circle cx="13.7" cy="13.3" r="0.7" fill="#C9A96E"/>
+        <circle cx="19.7" cy="13.3" r="0.7" fill="#C9A96E"/>
+        <path d="M14 19 Q16 20.5 18 19" stroke="#FAFAF8" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M13 8 L11 5 M19 8 L21 5" stroke="#1B2A4A" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M10 26 L13 25 M22 26 L19 25" stroke="#1B2A4A" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">GLAUX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="mailto:hello@glaux.nz">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">New Zealand · Used Car Intelligence</p>
+    <h1 class="hero-title">Buy your next car<br><em>with confidence</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-body">
+      GLAUX is an AI-powered car buying assistant for<br>
+      <strong>New Zealand car buyers.</strong><br>
+      Get the insights you need before you buy.
+    </p>
+    <span class="coming-soon">Coming Soon</span>
+    <div class="owl-wrap">
+      <svg width="48" height="4" viewBox="0 0 48 4" fill="none">
+        <line x1="0" y1="2" x2="48" y2="2" stroke="#C9A96E" stroke-width="0.8" stroke-dasharray="2 4"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <p class="section-label">About GLAUX</p>
+      <div class="about-grid">
+        <div>
+          <h2 class="about-heading">Intelligent guidance<br>for every <em>buyer</em></h2>
+        </div>
+        <div class="about-body">
+          <p>
+            Buying a used car is one of the most significant financial decisions most people make. Yet the process remains opaque, stressful, and prone to costly mistakes.
+          </p>
+          <p>
+            GLAUX brings clarity to the process. Our platform combines public data, market intelligence, and AI to help New Zealand buyers make informed, confident decisions.
+          </p>
+          <p>
+            Named after the ancient owl of Athena, GLAUX embodies the wisdom of seeing clearly before you act.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="features-grid">
+      <div class="feature-item">
+        <p class="feature-num">01</p>
+        <h3 class="feature-title">Vehicle Intelligence</h3>
+        <p class="feature-body">Access comprehensive vehicle history, registration, and ownership data in one place — before you make an offer.</p>
+      </div>
+      <div class="feature-item">
+        <p class="feature-num">02</p>
+        <h3 class="feature-title">Market Pricing</h3>
+        <p class="feature-body">Understand the true market value of any vehicle with real-time pricing benchmarks from the New Zealand used car market.</p>
+      </div>
+      <div class="feature-item">
+        <p class="feature-num">03</p>
+        <h3 class="feature-title">Risk Assessment</h3>
+        <p class="feature-body">Identify hidden risks — from financial encumbrances to odometer discrepancies — with a clear, easy-to-read report.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">GLAUX</span>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:hello@glaux.nz">hello@glaux.nz</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Glaux Ltd. New Zealand.</span>
+  </footer>
+
+</body>
+</html>
